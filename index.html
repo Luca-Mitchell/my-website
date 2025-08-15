@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luca Mitchell</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="master">
+      <header>
+        <h1>Luca Mitchell</h1>
+      </header>
+      <hr />
+      <section>
+        <h2>About me</h2>
+        <p>
+          I enjoy coding, painting, and mountain biking. I'm currently studying
+          Computer Science at Exeter Uni.
+        </p>
+      </section>
+      <hr />
+      <section>
+        <h2>Projects (click to expand)</h2>
+        <ol>
+          <li>
+            <button onclick="expand(0)">Title goes here</button>
+            <div class="expandable" data-expandable-id="0">
+              <h3>Title goes here</h3>
+              <p>
+                Description goes here
+              </p>
+              <ul>
+                <li><a href="">Live product</a></li>
+                <li><a href="">GitHub repo</a></li>
+              </ul>
+              <div class="carousel" data-carousel-id="0">
+                <img class="carousel-image" />
+                <div class="carousel-controls">
+                  <button onclick="prev(0)">Prev</button>
+                  <span class="carousel-progress"></span>
+                  <button onclick="next(0)">Next</button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <button onclick="expand(1)">Title goes here</button>
+            <div class="expandable" data-expandable-id="1">
+              <h3>Title goes here</h3>
+              <p>
+                Description goes here
+              </p>
+              <ul>
+                <li><a href="">Live product</a></li>
+                <li><a href="">GitHub repo</a></li>
+              </ul>
+              <div class="carousel" data-carousel-id="1">
+                <img class="carousel-image" />
+                <div class="carousel-controls">
+                  <button onclick="prev(1)">Prev</button>
+                  <span class="carousel-progress"></span>
+                  <button onclick="next(1)">Next</button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </section>
+      <hr />
+      <section>
+        <h2>My links</h2>
+        <ul>
+          <li><a href="mailto:lucajmitchell@gmail.com">Email</a></li>
+          <li><a href="https://github.com/Luca-Mitchell?tab=repositories" target="_blank">GitHub</a></li>
+        </ul>
+      </section>
+    </div>
+    <script>
+      function expand(id) {
+        const el = document.querySelector(
+          `.expandable[data-expandable-id="${id}"]`
+        );
+        const isExpanded = el.classList.contains('expanded');
+
+        document.querySelectorAll('.expandable').forEach((e) => {
+          e.classList.remove('expanded');
+        });
+
+        if (!isExpanded) {
+          el.classList.add('expanded');
+        }
+      }
+
+      const carouselsData = {
+        0: {
+          images: [
+            'images/image0.jpg',
+            'images/image1.jpg',
+            'images/image2.jpg',
+          ],
+          currentImageIndex: 0,
+        },
+        1: {
+          images: [
+            'images/image0.jpg',
+            'images/image1.jpg',
+            'images/image2.jpg',
+          ],
+          currentImageIndex: 0,
+        },
+      };
+
+      function updateProgress(id) {
+        const progress = document.querySelector(
+          `.carousel[data-carousel-id="${id}"] .carousel-progress`
+        );
+
+        const data = carouselsData[id];
+        const numOfImages = data.images.length;
+        const currentImageNum = data.currentImageIndex + 1;
+
+        progress.innerHTML = `${currentImageNum} / ${numOfImages}`;
+      }
+
+      function showImage(id, imageIndex) {
+        const image = document.querySelector(
+          `.carousel[data-carousel-id="${id}"] .carousel-image`
+        );
+
+        const data = carouselsData[id];
+        const path = data.images[imageIndex];
+
+        image.src = path;
+        data.currentImageIndex = imageIndex;
+
+        updateProgress(id);
+      }
+
+      function changeImage(id, step) {
+        const data = carouselsData[id];
+        const numOfImages = data.images.length;
+        const newImageIndex =
+          (data.currentImageIndex + step + numOfImages) % numOfImages;
+
+        showImage(id, newImageIndex);
+      }
+
+      function next(id) {
+        changeImage(id, 1);
+      }
+
+      function prev(id) {
+        changeImage(id, -1);
+      }
+
+      document.querySelectorAll('.carousel').forEach((el) => {
+        const id = el.dataset.carouselId;
+        showImage(id, 0);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+:root {
+  --bg: #eee;
+  --text: #222;
+  --muted: #888;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+  --space-xl: 128px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  color: var(--text);
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+body {
+  background-color: var(--bg);
+  padding: var(--space-xl) var(--space-md);
+}
+
+.master {
+  width: 80ch;
+  max-width: 100%;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+h2 {
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+}
+
+h3 {
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: var(--space-sm);
+}
+
+hr {
+  margin-bottom: var(--space-sm);
+}
+
+hr::after {
+  content: '-';
+}
+
+a,
+button {
+  text-decoration: none;
+  border-bottom: 1px dashed var(--muted);
+  cursor: pointer;
+}
+
+a:hover,
+button:hover {
+  color: var(--muted);
+}
+
+ol {
+  margin-bottom: var(--space-sm);
+  list-style-position: inside;
+}
+
+ol li::marker {
+  color: var(--muted);
+}
+
+ul {
+  margin-bottom: var(--space-sm);
+  list-style: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.expandable {
+  border: 1px solid var(--muted);
+  border-radius: var(--space-xs);
+  padding: var(--space-sm);
+  margin-block: var(--space-sm);
+  display: none;
+}
+
+.expanded {
+  display: block;
+}
+
+.carousel-image {
+  margin-bottom: var(--space-sm);
+}
+
+.carousel-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
